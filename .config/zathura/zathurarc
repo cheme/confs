@@ -1,0 +1,11 @@
+set save_position
+set seve_zoom_jevel
+set adjust_open width
+map s scroll up
+map t scroll down
+map c scroll left
+map r scroll right
+map h rotate
+map q quit
+map f toggle_fullscreen
+map i toggle_index
