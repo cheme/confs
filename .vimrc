@@ -25,16 +25,6 @@ fun SetupVAM()
   let g:vim_addon_manager.plugin_sources = {}
 
 
-
-  let g:vim_addon_manager.plugin_sources['self'] = {'type': 'git', 'url': 'https://github.com/megaannum/self.git'}
-  let g:vim_addon_manager.plugin_sources['forms'] = {'type': 'git', 'url': 'https://github.com/megaannum/forms.git'}
-  let g:vim_addon_manager.plugin_sources['vimproc'] = {'type': 'git', 'url': 'https://github.com/Shougo/vimproc.git'}
-  let g:vim_addon_manager.plugin_sources['vimshell'] = {'type': 'git', 'url': 'https://github.com/Shougo/vimshell.git'}
-  let g:vim_addon_manager.plugin_sources['ensime'] = {"type": "git", "url": "https://github.com/aemoncannon/ensime.git", "branch" : "scala-2.10"}
-  let g:vim_addon_manager.plugin_sources['vimside'] = {'type': 'git', 'url': 'https://github.com/megaannum/vimside.git'}
-  let g:vim_addon_manager.plugin_sources['ghcmod-vim'] = {'type': 'git', 'url': 'https://github.com/eagletmt/ghcmod-vim.git'}
-  let g:vim_addon_manager.plugin_sources['agda-vim'] = {'type': 'git', 'url': 'https://github.com/derekelkins/agda-vim.git'}
-
 "TODO test YouCompleteMe
   let plugins = [
     \  'molokai'
