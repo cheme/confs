@@ -14,5 +14,8 @@ export EDITOR=vim
 export VISUAL=vim
 # racer
 export RUST_SRC_PATH=/home/emeric/work/rustc/rust/src
-lesskey ~/.lesskeys
 # archey
+lesskey ~/.lesskeys
+# no gtk (eclipse java swt)
+SWT_GTK3=0
+

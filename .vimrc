@@ -6,14 +6,18 @@ set runtimepath+=/home/emeric/.vim/mySnippet
 let mapleader = "à"
 let maplocalleader = ","
 
+
+
+"Specific to vim (vam - syntastic)
+if !has('nvim')
+
+let g:racer_cmd = 'racer'
 let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'active_filetypes': [],
                                \ 'passive_filetypes': ['scala'] }
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=2
 let g:syntastic_quiet_warning=1
-let g:molokai_original=1
-let g:necoghc_enable_detailed_browse=1
 fun SetupVAM()
 
 
@@ -30,7 +34,6 @@ fun SetupVAM()
   let g:vim_addon_manager.plugin_sources['vimside'] = {'type': 'git', 'url': 'https://github.com/megaannum/vimside.git'}
   let g:vim_addon_manager.plugin_sources['ghcmod-vim'] = {'type': 'git', 'url': 'https://github.com/eagletmt/ghcmod-vim.git'}
   let g:vim_addon_manager.plugin_sources['agda-vim'] = {'type': 'git', 'url': 'https://github.com/derekelkins/agda-vim.git'}
-  let g:racer_cmd = 'racer'
 
 "TODO test YouCompleteMe
   let plugins = [
@@ -80,6 +83,92 @@ endf
 
 call SetupVAM()
 
+endif
+"Specific to neovim (vim plugin - neomake)
+if has('nvim')
+call plug#begin()
+
+Plug 'benekastah/neomake'
+Plug 'scrooloose/syntastic'
+Plug 'tomasr/molokai'
+Plug 'sjl/badwolf'
+Plug 'wting/rust.vim', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust', 'commit' : '15078bc52f86e1db' }
+"january first commit failure
+"Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'vim-airline'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'kien/ctrlp.vim', { 'on' : 'CtrlP' }
+Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate' | Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/DrawIt', { 'on':  'DrawIt' }
+Plug 'tpope/vim-surround'
+"  \ ,'vimproc'
+"    \ ,'ghcmod-vim'
+"t    \ ,'neco-ghc'
+"    \ ,'vimbed'
+"    \ ,'HaskellMode'
+ 
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-scripts/Colour-Sampler-Pack'
+Plug 'vim-scripts/Align', { 'on':  'Align' }
+Plug 'vim-scripts/Align', { 'on':  'AlignCtrl' }
+Plug 'majutsushi/tagbar'
+Plug 'vim-voom/VOoM', { 'on': 'Voom' }
+Plug 'vim-voom/VOoM', { 'on': 'Voomhelp' }
+Plug 'vim-scripts/fountain.vim', { 'for': 'fountain' }
+Plug 'vim-scripts/fountainwiki.vim', { 'for': 'fountain' }
+Plug 'Chiel92/vim-autoformat' "not yet with vam for vim : TODO add it
+
+"  \ ,'agda-vim'
+
+"    \ 'self'
+"   \ ,'forms'
+
+"   \ ,'ensime'
+"    \ ,'vimside'
+"    \ ,'LustyExplorer'
+"    \ ,'Markdown_syntax'
+"    \ ,'easytags'
+" TODO test YouCompleteMe
+
+
+call plug#end()
+nmap <silent> <LocalLeader>f :Autoformat <CR>
+let g:formatdef_rustfmt = '"rustfmt"'
+let g:formatters_rust = ['rustfmt']
+"autocmd BufWritePost *.rs Neomake
+autocmd Filetype rust nn <C-s> :w <CR> :Neomake! cargo <CR>
+autocmd Filetype rust nn <C-l> :w <CR> :NeomakeSh cargo test <CR>
+autocmd Filetype rust nn <C-c> :w <CR> :!export RUST_BACKTRACE=1; cargo test <CR>
+
+
+" neomake
+let g:neomake_rust_rustc_makers = {
+    \ 'args': [],
+    \ }
+"    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+let g:neomake_rust_enabled_makers = ['rustc']
+
+
+endif
+"terminal
+if has('nvim')
+tnoremap <silent> <LocalLeader>is <C-\><C-n><C-w>k
+tnoremap <silent> <LocalLeader>it <C-\><C-n><C-w>j
+tnoremap <silent> <LocalLeader>ic <C-\><C-n><C-w>h
+tnoremap <silent> <LocalLeader>ir <C-\><C-n><C-w>l
+tnoremap <silent> <LocalLeader>d <C-\><C-n>
+tnoremap <silent> <LocalLeader>q <C-\><C-n>:bd!<CR>
+tnoremap <silent> <LocalLeader>r <C-\><C-n>
+tnoremap <silent> <LocalLeader>c <C-\><C-n>
+
+endif
+
+
+let g:molokai_original=1
+let g:necoghc_enable_detailed_browse=1
+
 set hidden
 "autocmd needed due to vam usage
 autocmd VimEnter *.hs,*,*.lhs,*.chs,*.hsc colorscheme molokai
@@ -87,6 +176,7 @@ autocmd VimEnter *.scala colorscheme molokai
 
 "text tag custo
 au Bufenter *.fountain	setf fountain
+au Bufenter Cargo.toml	setf cargo
 au Bufenter *.txt set concealcursor=n
 au Bufenter *.txt set conceallevel=1
 au Bufenter *.txt syntax match SpanEnd "</span>" conceal
