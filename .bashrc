@@ -10,6 +10,8 @@ PS1='[\u@\h \W]\$ '
 
 export PATH=~/.cabal/bin:./.cabal-sandbox/bin:~/bin:$PATH
 export PATH=~/.gem/ruby/1.9.1/bin:$PATH
+export GOPATH="$HOME/gopath"
+export PATH="$PATH:$GOPATH/bin" 
 export EDITOR=vim
 export VISUAL=vim
 # racer

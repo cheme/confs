@@ -89,6 +89,7 @@ Plug 'racer-rust/vim-racer', { 'for': 'rust', 'commit' : '15078bc52f86e1db' }
 Plug 'vim-airline'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'kien/ctrlp.vim', { 'on' : 'CtrlP' }
+Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate' | Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/DrawIt', { 'on':  'DrawIt' }
