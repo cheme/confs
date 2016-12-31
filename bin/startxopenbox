@@ -1,0 +1,2 @@
+startx /home/emeric/.xinitob
+setxkbmap us,fr ,bepo
