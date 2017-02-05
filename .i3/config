@@ -137,6 +137,7 @@ bindsym $mod+g reload
 bindsym $mod+Shift+H restart
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+Q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+Q exit i3
 bindsym $mod+shift+m bar mode toggle
 
 # resize window (you can also use the mouse for that)
@@ -152,6 +153,13 @@ mode "resize" {
         bindsym $up         resize shrink height 10 px or 10 ppt
         bindsym $right      resize grow width 10 px or 10 ppt
 
+        bindsym $mod+$left       resize shrink width 10 px or 10 ppt
+        bindsym $mod+$down       resize grow height 10 px or 10 ppt
+        bindsym $mod+$up         resize shrink height 10 px or 10 ppt
+        bindsym $mod+$right      resize grow width 10 px or 10 ppt
+
+
+
         # same bindings, but for the arrow keys
         bindsym Left        resize shrink width 10 px or 10 ppt
         bindsym Down        resize grow height 10 px or 10 ppt
@@ -163,6 +171,7 @@ mode "resize" {
         bindsym Caps_Lock mode "default"
         bindsym Escape mode "default"
         bindsym n mode "default"
+        bindsym $mod+n mode "default"
 }
 
 bindsym $mod+n mode "resize"
@@ -171,6 +180,7 @@ bindsym $mod+n mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        mode hide
 }
 bindsym $mod+m bar hidden_state toggle
 
@@ -186,3 +196,8 @@ bindsym $mod+shift+x exec "setxkbmap us,fr ,bepo"
 bindsym $mod+v border toggle
 bindsym $mod+shift+Delete exec sudo shutdown -h 0
 new_window pixel 1
+
+
+bindsym $mod+k exec i3_k.sh
+bindsym $mod+shift+K exec i3_sk.sh
+
