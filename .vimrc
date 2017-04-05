@@ -405,8 +405,9 @@ let NERDTreeMapCWD="gd"
 let NERDTreeMapOpenVSplit="gs"
 
 "silversearche custo
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
+if executable('rg')
+  set grepprg=rg\ --no-heading\ --color\ never\ --column
+"  set grepprg=ag\ --nogroup\ --nocolor\ --column
   let g:ctrlp_use_caching = 0
   nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 "  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
